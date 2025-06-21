@@ -1,16 +1,19 @@
 {
   "name": "web_project_around_express",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto web com Express.js",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "node app.js",
+    "lint": "npx eslint ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Felipecolare/web_project_around_express.git"
   },
-  "author": "",
+  "author": "Felipe Colare",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Felipecolare/web_project_around_express/issues"
@@ -20,6 +23,9 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.31.0",
     "nodemon": "^3.1.10"
   }
 }
