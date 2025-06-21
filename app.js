@@ -1,4 +1,5 @@
 const express = require('express');
+
 const { PORT = 3000 } = process.env;
 
 const app = express();
@@ -15,7 +16,7 @@ app.get('/', (req, res) => {
 app.get('/users', (req, res) => {
   res.json([
     { id: 1, name: 'João' },
-    { id: 2, name: 'Maria' }
+    { id: 2, name: 'Maria' },
   ]);
 });
 
@@ -29,6 +30,7 @@ app.get('/users/:id', (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Algo deu errado!');
+  next();
 });
 
 // Middleware para rotas não encontradas
