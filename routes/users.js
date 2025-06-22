@@ -4,40 +4,24 @@ const fs = require('fs');
 
 const router = express.Router();
 
-// Caminho para o arquivo users.json
-const usersDataPath = path.join(__dirname, '..', 'data', 'users.json');
+// Caminho para o arquivo cards.json
+const cardsDataPath = path.join(__dirname, '..', 'data', 'cards.json');
 
-// Função para ler dados dos usuários
-const getUsersData = () => {
+// Função para ler dados dos cards
+const getCardsData = () => {
   try {
-    const data = fs.readFileSync(usersDataPath, 'utf8');
+    const data = fs.readFileSync(cardsDataPath, 'utf8');
     return JSON.parse(data);
   } catch (error) {
-    console.error('Erro ao ler arquivo users.json:', error);
+    console.error('Erro ao ler arquivo cards.json:', error);
     return [];
   }
 };
 
-// GET /users - Retorna todos os usuários
+// GET /cards - Retorna todos os cards
 router.get('/', (req, res) => {
-  const users = getUsersData();
-  res.json(users);
-});
-
-// GET /users/:id - Retorna usuário específico por ID
-router.get('/:id', (req, res) => {
-  const { id } = req.params;
-  const users = getUsersData();
-
-  const user = users.find((u) => u._id === id);
-
-  if (!user) {
-    return res.status(404).json({
-      message: 'ID do usuário não encontrado',
-    });
-  }
-
-  return res.json(user);
+  const cards = getCardsData();
+  res.json(cards);
 });
 
 module.exports = router;
