@@ -1,27 +1,28 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
+const {
+  createCard,
+  findCards,
+  deleteCard,
+  likeCard,
+  dislikeCard,
+// eslint-disable-next-line import/no-unresolved, import/extensions
+} = require('../controllers/card');
 
 const router = express.Router();
 
-// Caminho para o arquivo cards.json
-const cardsDataPath = path.join(__dirname, '..', 'data', 'cards.json');
+// GET /cards - Retorna todos os cartões
+router.get('/', findCards);
 
-// Função para ler dados dos cards
-const getCardsData = () => {
-  try {
-    const data = fs.readFileSync(cardsDataPath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('Erro ao ler arquivo cards.json:', error);
-    return [];
-  }
-};
+// POST /cards - Cria um novo cartão
+router.post('/', createCard);
 
-// GET /cards - Retorna todos os cards
-router.get('/', (req, res) => {
-  const cards = getCardsData();
-  res.json(cards);
-});
+// DELETE /cards/:cardId - Deleta um cartão por ID
+router.delete('/:cardId', deleteCard);
+
+// PUT /cards/:cardId/likes - Adiciona like a um cartão
+router.put('/:cardId/likes', likeCard);
+
+// DELETE /cards/:cardId/likes - Remove like de um cartão
+router.delete('/:cardId/likes', dislikeCard);
 
 module.exports = router;

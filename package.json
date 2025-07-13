@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/Felipecolare/web_project_around_express#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongoose": "^8.16.3"
   },
   "devDependencies": {
     "eslint": "^8.57.1",

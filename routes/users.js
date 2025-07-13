@@ -1,44 +1,28 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
+const {
+  createUser,
+  findUsers,
+  findUserById,
+  updateUser,
+  updateAvatar,
+// eslint-disable-next-line import/no-unresolved, import/extensions
+} = require('../controllers/user');
 
 const router = express.Router();
 
-// Caminho para o arquivo users.json
-const usersDataPath = path.join(__dirname, '..', 'data', 'users.json');
-
-// Função para ler dados dos usuários
-const getUsersData = () => {
-  try {
-    const data = fs.readFileSync(usersDataPath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('Erro ao ler arquivo users.json:', error);
-    return [];
-  }
-};
-
 // GET /users - Retorna todos os usuários
-router.get('/', (req, res) => {
-  const users = getUsersData();
-  return res.json(users);
-});
+router.get('/', findUsers);
 
 // GET /users/:id - Retorna um usuário específico por ID
-router.get('/:id', (req, res) => {
-  const users = getUsersData();
-  const userId = req.params.id;
+router.get('/:id', findUserById);
 
-  // Procura o usuário pelo ID
-  const user = users.find((u) => u._id === userId);
+// POST /users - Cria um novo usuário
+router.post('/', createUser);
 
-  if (!user) {
-    return res.status(404).json({
-      message: 'Usuário não encontrado',
-    });
-  }
+// PATCH /users/me - Atualiza o usuário atual
+router.patch('/me', updateUser);
 
-  return res.json(user);
-});
+// PATCH /users/me/avatar - Atualiza o avatar do usuário atual
+router.patch('/me/avatar', updateAvatar);
 
 module.exports = router;
