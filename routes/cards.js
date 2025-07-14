@@ -5,7 +5,6 @@ const {
   deleteCard,
   likeCard,
   dislikeCard,
-
 } = require('../controllers/cards');
 
 const router = express.Router();

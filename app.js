@@ -6,9 +6,6 @@ const mongoose = require('mongoose');
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
 
-// Importar middleware
-const authMiddleware = require('./Middleware/auth');
-
 const { PORT = 3000 } = process.env;
 
 const app = express();
@@ -47,9 +44,9 @@ app.get('/', (req, res) => {
   res.send('Servidor funcionando!');
 });
 
-// Usar as rotas
+// Usar as rotas - REMOVIDO authMiddleware das rotas de cards
 app.use('/users', usersRoutes);
-app.use('/cards', authMiddleware, cardsRoutes); // Aplicar middleware de auth nas rotas de cards
+app.use('/cards', cardsRoutes);
 
 // Middleware para rotas não encontradas
 app.use((req, res) => {

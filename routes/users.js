@@ -5,7 +5,6 @@ const {
   findUserById,
   updateUser,
   updateAvatar,
-
 } = require('../controllers/users');
 
 const router = express.Router();

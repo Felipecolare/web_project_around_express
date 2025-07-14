@@ -1,5 +1,8 @@
 const { Schema, model } = require('mongoose');
 
+// Regex para validação de URLs
+const URL_REGEX = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+
 const cardSchema = new Schema({
   name: {
     type: String,
@@ -12,7 +15,7 @@ const cardSchema = new Schema({
     required: true,
     validate: {
       validator(value) {
-        return /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(value);
+        return URL_REGEX.test(value);
       },
       message: 'Link inválido',
     },
@@ -36,3 +39,6 @@ const cardSchema = new Schema({
 });
 
 module.exports = model('card', cardSchema);
+
+// Exportar também o regex para reutilização
+module.exports.URL_REGEX = URL_REGEX;
