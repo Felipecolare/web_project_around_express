@@ -2,7 +2,7 @@
 const authMiddleware = (req, res, next) => {
   // Substitua este ID pelo ID real do usuário criado no MongoDB
   req.user = {
-    _id: '67764642c412c4655ba639', // IMPORTANTE: Substitua pelo ID real do usuário
+    _id: '686481c08bc1145e2801bb2e', // IMPORTANTE: Substitua pelo ID real do usuário
   };
   next();
 };

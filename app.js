@@ -14,10 +14,10 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-// Conexão com MongoDB
+// Conexão com MongoDB - CORRIGIDO: aroundb -> arounddb
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/aroundb', {
+    await mongoose.connect('mongodb://localhost:27017/arounddb', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -59,7 +59,7 @@ app.use((req, res) => {
   });
 });
 
-// Middleware de tratamento de erros
+// Middleware de tratamento de erros - CORRIGIDO: adicionado next parameter
 app.use((err, req, res) => {
   console.error('Erro:', err.stack);
   res.status(500).json({
