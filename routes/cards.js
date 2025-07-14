@@ -5,8 +5,8 @@ const {
   deleteCard,
   likeCard,
   dislikeCard,
-// eslint-disable-next-line import/no-unresolved, import/extensions
-} = require('../controllers/card');
+
+} = require('../controllers/cards');
 
 const router = express.Router();
 

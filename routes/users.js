@@ -5,8 +5,8 @@ const {
   findUserById,
   updateUser,
   updateAvatar,
-// eslint-disable-next-line import/no-unresolved, import/extensions
-} = require('../controllers/user');
+
+} = require('../controllers/users');
 
 const router = express.Router();
 
