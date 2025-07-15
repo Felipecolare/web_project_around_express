@@ -8,7 +8,7 @@ function createCard(req, res) {
   }
 
   // Usar um ID fixo por enquanto (substitua pelo ID real do seu usuário)
-  const ownerId = req.user ? req.user._id : '67764642c412c4655ba639';
+  const ownerId = req.user._id;
 
   return Card.create({ name, link, owner: ownerId })
     .then((card) => res.status(201).json(card))
@@ -45,11 +45,11 @@ function deleteCard(req, res) {
 
 function likeCard(req, res) {
   const { cardId } = req.params;
-  const userId = req.user ? req.user._id : '67764642c412c4655ba639';
+  const ownerId = req.user._id;
 
   return Card.findByIdAndUpdate(
     cardId,
-    { $addToSet: { likes: userId } },
+    { $addToSet: { likes: ownerId } },
     { new: true },
   )
     .orFail(() => {
@@ -66,11 +66,11 @@ function likeCard(req, res) {
 
 function dislikeCard(req, res) {
   const { cardId } = req.params;
-  const userId = req.user ? req.user._id : '67764642c412c4655ba639';
+  const ownerId = req.user._id;
 
   return Card.findByIdAndUpdate(
     cardId,
-    { $pull: { likes: userId } },
+    { $pull: { likes: ownerId } },
     { new: true },
   )
     .orFail(() => {

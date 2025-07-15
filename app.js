@@ -39,6 +39,14 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  req.user = {
+    _id: '67764642c412c4655ba639',
+  };
+
+  next();
+});
+
 // Rota básica
 app.get('/', (req, res) => {
   res.send('Servidor funcionando!');

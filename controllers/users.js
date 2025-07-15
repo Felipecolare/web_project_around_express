@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const User = require('../models/user');
 
 function createUser(req, res) {
@@ -31,7 +32,11 @@ function findUsers(req, res) {
 
 function findUserById(req, res) {
   const userId = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).send({ message: 'ID inválido' });
+  }
   return User.findById(userId)
+    .orFail()
     .then((user) => {
       if (!user) {
         return res.status(404).send({ message: 'Usuário não encontrado' });
